@@ -38,18 +38,18 @@ const CreatePost = () => {
       <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5">
           <FormField
-          labelName = "your name"
+          labelName = "Your name"
           type = "text"
           name = "name"
           placeholder = "John Doe"
-          value= {form.name}
+          value= {Form.name}
           handleChange={handleChange}/>
            <FormField
-          labelName = "Promot"
+          labelName = "Prompt"
           type = "text"
           name = "prompt"
           placeholder = "a sunlit indoor lounge area with a pool with clear water and another pool with translucent pastel pink water, next to a big window, digital art"
-          value= {form.prompt}
+          value= {Form.prompt}
           handleChange={handleChange}
           isSurpriseMe
           handlerSurpriseMe={handlerSurpriseMe}/>
