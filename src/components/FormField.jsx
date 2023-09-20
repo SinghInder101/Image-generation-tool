@@ -31,10 +31,11 @@ const FormField = ({
       </div>
       <input
         type={type}
+        name={name}
         id={name}
         placeholder={placeholder}
         value={value}
-        onChange={handleChange}
+        onInput={handleChange}
         required
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#4649FF] focus:border-[#4649FF] outline-none block w-full p-3"
       />
