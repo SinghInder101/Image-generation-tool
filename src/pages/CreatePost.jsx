@@ -23,7 +23,7 @@ const CreatePost = () => {
       setLoading(true);
       try {
 
-        const response = await fetch('http:localhost:3000/api/v1/post',{
+        const response = await fetch('http://localhost:3000/api/v1/post',{
           method:'POST',
           headers:{
             'Content-Type': 'application/json'
@@ -31,7 +31,8 @@ const CreatePost = () => {
           body: JSON.stringify(Form)
         })
         await response.json();
-        navigate('/')
+        navigate('/');
+        
       } catch (error) {
         alert(err)
       } finally{
