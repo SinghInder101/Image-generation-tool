@@ -15,7 +15,33 @@ const CreatePost = () => {
   const [generatingImg, setgeneratingImg] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  const handleSubmit = () => {};
+  const handleSubmit = async(e) => {
+
+    e.preventDefault();
+
+    if(Form.prompt && Form.photo){
+      setLoading(true);
+      try {
+
+        const response = await fetch('http:localhost:3000/api/v1/post',{
+          method:'POST',
+          headers:{
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(Form)
+        })
+        await response.json();
+        navigate('/')
+      } catch (error) {
+        alert(err)
+      } finally{
+        setLoading(false);
+      }
+    } else {
+      alert('Please enter a prompt and generate an image')
+    }
+
+  };
 
   const handleChange = (e) => {
     setForm({ ...Form, [e.target.name]: e.target.value });
@@ -26,7 +52,34 @@ const CreatePost = () => {
 
     setForm({ ...Form, prompt: randomPrompt });
   };
-  const generateImage = () => {};
+  const generateImage = async () => {
+    if (Form.prompt) {
+      try {
+        console.log(Form.prompt);
+        const body = JSON.stringify({ prompt: Form.prompt });
+        console.log(body);
+
+        setgeneratingImg(true);
+        const response = await fetch("http://localhost:3000/api/v1/dalle", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prompt: Form.prompt }),
+        });
+
+        const data = await response.json();
+
+        setForm({ ...Form, photo: `data:image/jpeg;base64,${data.photo}` });
+      } catch (error) {
+        alert(error);
+      } finally {
+        setgeneratingImg(false);
+      }
+    } else {
+      alert("Please enter a prompt");
+    }
+  };
 
   return (
     <section className="max-w-7xl mx-auto">
